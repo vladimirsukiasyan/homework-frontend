@@ -120,4 +120,20 @@ QUnit.module('Тестируем функцию sorting', function () {
 
 		assert.deepEqual(actual, expected);
 	});
+	QUnit.test('sorting работает со специальными константами', function (assert) {
+		const initial = [
+			{prop1: Infinity},
+			{prop1: 100000},
+			{prop1: 0}
+		];
+		const actual = sorting(initial, ['prop1']);
+
+		const expected = [
+			{prop1: 0},
+			{prop1: 100000},
+			{prop1: Infinity}
+		];
+
+		assert.deepEqual(actual, expected);
+	});
 });
