@@ -120,6 +120,7 @@ QUnit.module('Тестируем функцию sorting', function () {
 
 		assert.deepEqual(actual, expected);
 	});
+
 	QUnit.test('sorting работает со специальными константами', function (assert) {
 		const initial = [
 			{prop1: Infinity},
@@ -134,6 +135,32 @@ QUnit.module('Тестируем функцию sorting', function () {
 			{prop1: Infinity}
 		];
 
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting не изменяет массив, если хотя бы один из переданных аргументов не является массивом',function (assert) {
+		const initial = [
+			{prop1: 1},
+			{prop1: 2},
+			{prop1: 3},
+			{prop1: 4}
+		];
+		const actual = sorting(initial, true);
+
+		const expected = [
+			{prop1: 1},
+			{prop1: 2},
+			{prop1: 3},
+			{prop1: 4}
+		];
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting не изменяет массив, если хотя бы один из переданных аргументов не является массивом',function (assert) {
+		const initial = "Nursultan";
+		const actual = sorting(initial, true);
+
+		const expected = "Nursultan";
 		assert.deepEqual(actual, expected);
 	});
 });
