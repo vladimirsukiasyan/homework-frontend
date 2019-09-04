@@ -14,7 +14,6 @@ const sorting = (objects, params) => {
     return objects;
   }
 
-  return objects.sort((object1, object2) => params.reduce((result, prop) => {
-    result || compare(object1[prop], object2[prop]);
-  }, 0));
+  return objects.sort((object1, object2) => params.reduce((result, prop) =>
+    result || compare(object1[prop], object2[prop])), 0);
 };
