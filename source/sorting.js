@@ -13,7 +13,7 @@ const sorting = (objects, params) => {
   objects.sort((object1, object2) => {
     for (let param of params) {
       if ([object1, object2].find(obj =>
-        typeof obj[param] === undefined
+        typeof obj[param] === 'undefined'
       )) {
         return 0;
       }
