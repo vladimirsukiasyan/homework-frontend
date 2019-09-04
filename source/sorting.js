@@ -1,5 +1,11 @@
 'use strict';
 
+/**
+ * Сортирует массив объектов по заданным полям. Сортировка-устойчивая
+ * @param objects - массив сортируемых объектов
+ * @param params - поля сортировки
+ * @returns {undefined}
+ */
 const sorting = (objects, params) => {
   if (![objects, params].every(Array.isArray)) {
     return objects;
