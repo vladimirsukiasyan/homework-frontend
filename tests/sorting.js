@@ -138,6 +138,23 @@ QUnit.module('Тестируем функцию sorting', function () {
 		assert.deepEqual(actual, expected);
 	});
 
+	QUnit.test('sorting работает со специальными константами и с несколькими полями сортировки', function (assert) {
+		const initial = [
+			{prop1: Infinity},
+			{prop1: 100000},
+			{prop1: 0}
+		];
+		const actual = sorting(initial, ['prop1', 'prop2']);
+
+		const expected = [
+			{prop1: 0},
+			{prop1: 100000},
+			{prop1: Infinity}
+		];
+
+		assert.deepEqual(actual, expected);
+	});
+
 	QUnit.test('sorting не изменяет массив, если хотя бы один из переданных аргументов не является массивом',function (assert) {
 		const initial = [
 			{prop1: 1},
@@ -156,11 +173,37 @@ QUnit.module('Тестируем функцию sorting', function () {
 		assert.deepEqual(actual, expected);
 	});
 
-	QUnit.test('sorting не изменяет массив, если хотя бы один из переданных аргументов не является массивом',function (assert) {
-		const initial = "Nursultan";
+	QUnit.test('sorting не изменяет массив, если хотя бы один из переданных аргументов не является массивом', function (assert) {
+		const initial = 'Nursultan';
 		const actual = sorting(initial, true);
 
-		const expected = "Nursultan";
+		const expected = 'Nursultan';
+		assert.deepEqual(actual, expected);
+	});
+
+	QUnit.test('sorting будет сортировать только по тем полям, которые существуют, сохраняя устойчивость', function (assert) {
+		const initial = [
+			{ prop1: 3, id: 1 },
+			{ prop1: 3, id: 2 },
+			{ prop1: 1, id: 1 },
+			{ prop1: 1, id: undefined },
+			{ prop1: 4, id: 1 },
+			{ prop1: 4, id: 2 },
+			{ prop1: 2, id: 1 },
+			{ prop1: 2, id: 2 }
+		];
+		const actual = sorting(initial, ['prop1', 'prop2']);
+
+		const expected = [
+			{ prop1: 1, id: 1 },
+			{ prop1: 1, id: undefined },
+			{ prop1: 2, id: 1 },
+			{ prop1: 2, id: 2 },
+			{ prop1: 3, id: 1 },
+			{ prop1: 3, id: 2 },
+			{ prop1: 4, id: 1 },
+			{ prop1: 4, id: 2 }
+		];
 		assert.deepEqual(actual, expected);
 	});
 });
